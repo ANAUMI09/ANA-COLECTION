@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produk | Ana Collection</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #fff5f8;
+  color: #333;
+}
+
+header {
+  background: #f5a9c5;
+  padding: 22px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #8d2850;
+}
+
+.hero {
+  text-align: center;
+  padding: 35px 15px;
+}
+
+.hero h1 {
+  color: #d94f86;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: #666;
+}
+
+.kontrol {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 15px 25px;
+  flex-wrap: wrap;
+}
+
+.kontrol input,
+.kontrol select {
+  padding: 12px;
+  border: 1px solid #f0a4c0;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+}
+
+.kontrol input {
+  width: 250px;
+  max-width: 100%;
+}
+
+.produk-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 22px;
+  padding: 0 6% 40px;
+}
+
+.produk-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px #00000012;
+  transition: transform 0.2s;
+}
+
+.produk-card:hover {
+  transform: translateY(-5px);
+}
+
+.produk-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: contain;
+  background: white;
+  padding: 8px;
+}
+
+.produk-info {
+  padding: 16px;
+}
+
+.produk-info h3 {
+  color: #c83f77;
+  margin-bottom: 8px;
+}
+
+.kategori {
+  display: inline-block;
+  background: #ffe0eb;
+  color: #a62d60;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.harga {
+  font-size: 17px;
+  font-weight: bold;
+  color: #d94f86;
+  margin-bottom: 14px;
+}
+
+.tombol {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  margin-top: 7px;
+  border: none;
+  border-radius: 8px;
+  background: #f5a9c5;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tombol:hover {
+  background: #df6d9a;
+}
+
+.beli {
+  background: #d94f86;
+}
+
+.keranjang,
+.checkout-box {
+  background: white;
+  margin: 0 6% 30px;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px #00000012;
+}
+
+.keranjang h2,
+.checkout-box h2 {
+  color: #c83f77;
+  margin-bottom: 15px;
+}
+
+.item-keranjang {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #f3d4e0;
+  padding: 12px 0;
+  flex-wrap: wrap;
+}
+
+.item-keranjang button {
+  border: none;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #ffe0eb;
+  cursor: pointer;
+}
+
+.total {
+  font-size: 19px;
+  font-weight: bold;
+  color: #c83f77;
+  margin-top: 18px;
+}
+
+.kosong {
+  color: #777;
+}
+
+.checkout-box {
+  display: none;
+}
+
+.checkout-box label {
+  display: block;
+  margin-top: 13px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.checkout-box input,
+.checkout-box textarea,
+.checkout-box select {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e8b5c9;
+  border-radius: 8px;
+  background: #fffafd;
+  font-size: 15px;
+}
+
+.checkout-box textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.ringkasan {
+  background: #fff5f8;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.berhasil {
+  display: none;
+  background: #fff;
+  margin: 0 6% 30px;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px #00000012;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.berhasil h2 {
+  color: #c83f77;
+  margin-bottom: 12px;
+}
+
+.tidak-ada {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: #777;
+}
+
+footer {
+  background: #f5a9c5;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .produk-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .produk-card img {
+    height: 160px;
+  }
+
+  .produk-info {
+    padding: 10px;
+  }
+
+  .produk-info h3 {
+    font-size: 15px;
+  }
+
+  .keranjang,
+  .checkout-box,
+  .berhasil {
+    margin-left: 4%;
+    margin-right: 4%;
+    padding: 16px;
+  }
+}
+
+@media print {
+  header, nav, footer, .kontrol, .produk-container,
+  .keranjang, .checkout-box, .tombol {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  .berhasil {
+    display: block !important;
+    box-shadow: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Ana Collection</div>
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="produk.html">Produk</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="tentang.html">Tentang</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Koleksi Produk Kami</h1>
+  <p>Temukan fashion favoritmu di Ana Collection 💗</p>
+</section>
+
+<section class="kontrol">
+  <input type="text" id="cari"
+    placeholder="Cari nama produk..."
+    oninput="tampilkanProduk()">
+
+  <select id="filterKategori" onchange="tampilkanProduk()">
+    <option value="semua">Semua Kategori</option>
+    <option value="kemeja">Kemeja</option>
+    <option value="celana">Celana</option>
+    <option value="gamis">Gamis</option>
+    <option value="kerudung">Kerudung</option>
+    <option value="sepatu">Sepatu</option>
+    <option value="sandal">Sandal</option>
+    <option value="heels">Heels</option>
+    <option value="jaket">Jaket</option>
+    <option value="batik">Batik</option>
+  </select>
+</section>
+
+<main class="produk-container" id="daftarProduk"></main>
+
+<section class="keranjang" id="bagianKeranjang">
+  <h2>🛒 Keranjang Belanja</h2>
+  <div id="isiKeranjang"></div>
+  <p class="total" id="totalHarga">Total: Rp0</p>
+
+  <button class="tombol beli" onclick="checkout()">
+    Checkout Sekarang
+  </button>
+</section>
+
+<section class="checkout-box" id="formCheckout">
+  <h2>📝 Data Pemesanan</h2>
+  <p>Silakan isi data untuk menyelesaikan pesanan.</p>
+
+  <form id="formPemesanan" onsubmit="buatPesanan(event)">
+    <label for="namaPembeli">Nama Lengkap</label>
+    <input id="namaPembeli" type="text"
+      placeholder="Masukkan nama lengkap" required>
+
+    <label for="hpPembeli">Nomor HP</label>
+    <input id="hpPembeli" type="tel"
+      placeholder="Masukkan nomor HP aktif"
+      pattern="[0-9+ ]{9,18}" required>
+
+    <label for="alamatPembeli">Alamat Lengkap</label>
+    <textarea id="alamatPembeli"
+      placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota"
+      required></textarea>
+
+    <label for="metodePembayaran">Metode Pembayaran</label>
+    <select id="metodePembayaran" required>
+      <option value="COD">COD (Bayar di Tempat)</option>
+      <option value="Transfer Bank">Transfer Bank</option>
+    </select>
+
+    <div class="ringkasan" id="ringkasanCheckout"></div>
+
+    <button type="submit" class="tombol beli">
+      Buat Pesanan
+    </button>
+
+    <button type="button" class="tombol"
+      onclick="tutupCheckout()">
+      Kembali ke Keranjang
+    </button>
+  </form>
+</section>
+
+<section class="berhasil" id="hasilPesanan" aria-live="polite"></section>
+
+<footer>
+  <p>© 2026 Ana Collection. Temukan gaya favoritmu!</p>
+</footer>
+
+<script>
+const produk = [
+  { id: 1, nama: "Kemeja", kategori: "kemeja", harga: 75000, gambar: "images/kemeja.jpg.jpeg" },
+  { id: 2, nama: "Celana", kategori: "celana", harga: 85000, gambar: "images/celana.jpg.jpeg" },
+  { id: 3, nama: "Gamis Cantik", kategori: "gamis", harga: 120000, gambar: "images/gamis cantik.jpg.jpeg" },
+  { id: 4, nama: "Kerudung", kategori: "kerudung", harga: 35000, gambar: "images/krudung.jpg.jpeg" },
+  { id: 5, nama: "Sepatu", kategori: "sepatu", harga: 150000, gambar: "images/sepatu.jpg.jpeg" },
+  { id: 6, nama: "Sepatu Cewek", kategori: "sepatu", harga: 145000, gambar: "images/sepatu cewek.jpeg" },
+  { id: 7, nama: "Sepatu Cowok", kategori: "sepatu", harga: 160000, gambar: "images/sepatu cowok.jpeg" },
+  { id: 8, nama: "Heels", kategori: "heels", harga: 135000, gambar: "images/heels.webp" },
+  { id: 9, nama: "Sandal", kategori: "sandal", harga: 45000, gambar: "images/sandal.jpg.jpeg" },
+  { id: 10, nama: "Sandal Cowok", kategori: "sandal", harga: 55000, gambar: "images/sandal cowok.jpeg" },
+  { id: 11, nama: "Jaket", kategori: "jaket", harga: 110000, gambar: "images/jaket.jpeg" },
+  { id: 12, nama: "Batik Pria", kategori: "batik", harga: 90000, gambar: "images/batik pria.jpeg" }
+];
+
+let keranjang = [];
+
+function formatRupiah(angka) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(angka);
+}
+
+function totalBelanja() {
+  return keranjang.reduce((total, item) =>
+    total + item.harga * item.jumlah, 0);
+}
+
+function tampilkanProduk() {
+  const daftar = document.getElementById("daftarProduk");
+  const kata = document.getElementById("cari").value.toLowerCase();
+  const kategori = document.getElementById("filterKategori").value;
+
+  const hasil = produk.filter(item => {
+    return item.nama.toLowerCase().includes(kata) &&
+      (kategori === "semua" || item.kategori === kategori);
+  });
+
+  if (hasil.length === 0) {
+    daftar.innerHTML =
+      '<p class="tidak-ada">Produk tidak ditemukan.</p>';
+    return;
+  }
+
+  daftar.innerHTML = hasil.map(item => `
+    <article class="produk-card">
+      <img src="${item.gambar}" alt="${item.nama}" loading="lazy"
+        onerror="this.onerror=null; this.style.display='none';">
+      <div class="produk-info">
+        <span class="kategori">${item.kategori}</span>
+        <h3>${item.nama}</h3>
+        <p class="harga">${formatRupiah(item.harga)}</p>
+        <button class="tombol" onclick="tambahKeranjang(${item.id})">
+          + Keranjang
+        </button>
+        <button class="tombol beli" onclick="beliSekarang(${item.id})">
+          Beli Sekarang
+        </button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function tambahKeranjang(id) {
+  const item = produk.find(p => p.id === id);
+  const ada = keranjang.find(p => p.id === id);
+
+  if (ada) {
+    ada.jumlah++;
+  } else {
+    keranjang.push({
+      id: item.id,
+      nama: item.nama,
+      harga: item.harga,
+      jumlah: 1
+    });
+  }
+
+  simpanKeranjang();
+  tampilkanKeranjang();
+  alert(item.nama + " ditambahkan ke keranjang!");
+}
+
+function tampilkanKeranjang() {
+  const isi = document.getElementById("isiKeranjang");
+  const totalElement = document.getElementById("totalHarga");
+
+  if (keranjang.length === 0) {
+    isi.innerHTML =
+      '<p class="kosong">Keranjang kamu masih kosong.</p>';
+    totalElement.textContent = "Total: Rp0";
+    return;
+  }
+
+  isi.innerHTML = keranjang.map(item => `
+    <div class="item-keranjang">
+      <div>
+        <strong>${item.nama}</strong><br>
+        ${formatRupiah(item.harga)} × ${item.jumlah}
+      </div>
+      <div>
+        <button onclick="ubahJumlah(${item.id}, -1)">−</button>
+        <button onclick="ubahJumlah(${item.id}, 1)">+</button>
+        <button onclick="hapusItem(${item.id})">Hapus</button>
+      </div>
+    </div>
+  `).join("");
+
+  totalElement.textContent = "Total: " + formatRupiah(totalBelanja());
+}
+
+function ubahJumlah(id, perubahan) {
+  const item = keranjang.find(p => p.id === id);
+  if (!item) return;
+
+  item.jumlah += perubahan;
+
+  if (item.jumlah <= 0) {
+    keranjang = keranjang.filter(p => p.id !== id);
+  }
+
+  simpanKeranjang();
+  tampilkanKeranjang();
+}
+
+function hapusItem(id) {
+  keranjang = keranjang.filter(item => item.id !== id);
+  simpanKeranjang();
+  tampilkanKeranjang();
+}
+
+function simpanKeranjang() {
+  try {
+    localStorage.setItem("anaCollectionKeranjang", JSON.stringify(keranjang));
+  } catch (error) {
+    console.warn("Keranjang tidak dapat disimpan.");
+  }
+}
+
+function beliSekarang(id) {
+  const item = produk.find(p => p.id === id);
+  const ada = keranjang.find(p => p.id === id);
+
+  if (ada) {
+    ada.jumlah++;
+  } else {
+    keranjang.push({
+      id: item.id,
+      nama: item.nama,
+      harga: item.harga,
+      jumlah: 1
+    });
+  }
+
+  simpanKeranjang();
+  tampilkanKeranjang();
+
+  document.getElementById("bagianKeranjang").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function checkout() {
+  if (keranjang.length === 0) {
+    alert("Keranjang masih kosong. Pilih produk terlebih dahulu.");
+    return;
+  }
+
+  document.getElementById("hasilPesanan").style.display = "none";
+  document.getElementById("formCheckout").style.display = "block";
+
+  document.getElementById("ringkasanCheckout").innerHTML = `
+    <h3>Ringkasan Pesanan</h3>
+    ${keranjang.map(item => `
+      <p>${item.nama} × ${item.jumlah} — 
+      ${formatRupiah(item.harga * item.jumlah)}</p>
+    `).join("")}
+    <hr>
+    <h3>Total: ${formatRupiah(totalBelanja())}</h3>
+  `;
+
+  document.getElementById("formCheckout").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function tutupCheckout() {
+  document.getElementById("formCheckout").style.display = "none";
+  document.getElementById("bagianKeranjang").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function escapeHTML(teks) {
+  return String(teks).replace(/[&<>"']/g, karakter => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[karakter]);
+}
+
+function buatPesanan(event) {
+  event.preventDefault();
+
+  if (keranjang.length === 0) {
+    alert("Keranjang kosong. Silakan pilih produk kembali.");
+    return;
+  }
+
+  const nama = document.getElementById("namaPembeli").value.trim();
+  const hp = document.getElementById("hpPembeli").value.trim();
+  const alamat = document.getElementById("alamatPembeli").value.trim();
+  const metode = document.getElementById("metodePembayaran").value;
+
+  if (!nama || !hp || !alamat) {
+    alert("Mohon lengkapi data pemesanan.");
+    return;
+  }
+
+  const pesanan = {
+    nomor: "AC" + Date.now(),
+    nama,
+    hp,
+    alamat,
+    metodePembayaran: metode,
+    produk: keranjang.map(item => ({ ...item })),
+    total: totalBelanja(),
+    tanggal: new Date().toLocaleString("id-ID"),
+    status: "Menunggu konfirmasi"
+  };
+
+  let daftarPesanan = [];
+
+  try {
+    daftarPesanan = JSON.parse(
+      localStorage.getItem("anaCollectionPesanan") || "[]"
+    );
+
+    if (!Array.isArray(daftarPesanan)) daftarPesanan = [];
+  } catch (error) {
+    daftarPesanan = [];
+  }
+
+  daftarPesanan.push(pesanan);
+
+  try {
+    localStorage.setItem(
+      "anaCollectionPesanan",
+      JSON.stringify(daftarPesanan)
+    );
+  } catch (error) {
+    alert("Pesanan tidak dapat disimpan di browser ini.");
+    return;
+  }
+
+  document.getElementById("hasilPesanan").innerHTML = `
+    <h2>🎉 Pesanan Berhasil Dibuat!</h2>
+    <p>Terima kasih sudah berbelanja di Ana Collection.</p>
+    <p>Nomor Pesanan: <strong>${pesanan.nomor}</strong></p>
+    <p>Nama: ${escapeHTML(nama)}</p>
+    <p>Nomor HP: ${escapeHTML(hp)}</p>
+    <p>Alamat: ${escapeHTML(alamat)}</p>
+    <p>Metode Pembayaran: <strong>${escapeHTML(metode)}</strong></p>
+    <p>Total Pembayaran: <strong>${formatRupiah(pesanan.total)}</strong></p>
+    <p>Status: ${pesanan.status}</p>
+    <p>Pesanan tersimpan di browser ini. Simpan nomor pesananmu.</p>
+
+    <button class="tombol beli" onclick="window.print()">
+      Cetak Pesanan
+    </button>
+
+    <button class="tombol" onclick="kembaliKeProduk()">
+      ← Kembali ke Produk
+    </button>
+  `;
+
+  keranjang = [];
+  simpanKeranjang();
+  tampilkanKeranjang();
+
+  document.getElementById("formPemesanan").reset();
+  document.getElementById("formCheckout").style.display = "none";
+  document.getElementById("hasilPesanan").style.display = "block";
+
+  document.getElementById("hasilPesanan").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function kembaliKeProduk() {
+  document.getElementById("hasilPesanan").style.display = "none";
+  document.getElementById("formCheckout").style.display = "none";
+
+  document.getElementById("cari").value = "";
+  document.getElementById("filterKategori").value = "semua";
+
+  tampilkanProduk();
+
+  document.getElementById("daftarProduk").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+try {
+  const tersimpan = localStorage.getItem("anaCollectionKeranjang");
+  if (tersimpan) {
+    const data = JSON.parse(tersimpan);
+    if (Array.isArray(data)) keranjang = data;
+  }
+} catch (error) {
+  keranjang = [];
+}
+
+tampilkanProduk();
+tampilkanKeranjang();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri | Ana Collection</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #fff5f8;
+      color: #333;
+    }
+
+    header {
+      background: #f5a9c5;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #8d2850;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 45px 15px 30px;
+    }
+
+    .hero h1 {
+      color: #d94f86;
+      margin-bottom: 12px;
+      font-size: 32px;
+    }
+
+    .hero p {
+      color: #777;
+      line-height: 1.7;
+    }
+
+    .filter {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 15px 30px;
+    }
+
+    .filter button {
+      border: 1px solid #f5a9c5;
+      border-radius: 25px;
+      padding: 10px 18px;
+      background: white;
+      color: #c83f77;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .filter button:hover,
+    .filter button.aktif {
+      background: #d94f86;
+      color: white;
+    }
+
+    .galeri {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      padding: 0 6% 45px;
+    }
+
+    .galeri-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px #00000012;
+      transition: transform 0.2s;
+    }
+
+    .galeri-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .galeri-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      background: white;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .keterangan {
+      padding: 14px;
+      text-align: center;
+    }
+
+    .keterangan h3 {
+      color: #c83f77;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .keterangan p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    .tidak-ada {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+
+    .tentang-promo {
+      text-align: center;
+      padding: 35px 20px 45px;
+      margin: 0 6% 35px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px #00000012;
+    }
+
+    .tentang-promo h2 {
+      color: #d94f86;
+      margin-bottom: 12px;
+    }
+
+    .tentang-promo p {
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .tombol-tentang {
+      display: inline-block;
+      background: #d94f86;
+      color: white;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .tombol-tentang:hover {
+      background: #b8326a;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      background: #000000d9;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      background: white;
+    }
+
+    .tutup {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: white;
+      font-size: 35px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #f5a9c5;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .galeri {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .galeri {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding-left: 4%;
+        padding-right: 4%;
+      }
+
+      .galeri-card img {
+        height: 170px;
+      }
+
+      .keterangan {
+        padding: 10px;
+      }
+
+      .keterangan h3 {
+        font-size: 15px;
+      }
+
+      .tentang-promo {
+        margin-left: 4%;
+        margin-right: 4%;
+        padding: 25px 15px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Ana Collection</div>
+
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="produk.html">Produk</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="tentang.html">Tentang</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Galeri Ana Collection 💗</h1>
+    <p>
+      Jelajahi koleksi fashion pilihan kami.<br>
+      Temukan inspirasi gaya favoritmu di sini!
+    </p>
+  </section>
+
+  <section class="filter">
+    <button class="aktif" onclick="filterGaleri('semua', this)">Semua</button>
+    <button onclick="filterGaleri('atasan', this)">Atasan</button>
+    <button onclick="filterGaleri('bawahan', this)">Bawahan</button>
+    <button onclick="filterGaleri('muslim', this)">Fashion Muslim</button>
+    <button onclick="filterGaleri('sepatu', this)">Sepatu & Sandal</button>
+    <button onclick="filterGaleri('lainnya', this)">Lainnya</button>
+  </section>
+
+  <main class="galeri" id="daftarGaleri"></main>
+
+  <!-- Tombol menuju halaman Tentang -->
+  <section class="tentang-promo">
+    <h2>Ingin Mengenal Kami Lebih Dekat? 💕</h2>
+
+    <p>
+      Yuk, kenali Ana Collection lebih jauh dan temukan
+      koleksi fashion yang sesuai dengan gaya favoritmu.
+    </p>
+
+    <a href="tentang.html" class="tombol-tentang">
+      Tentang Ana Collection →
+    </a>
+  </section>
+
+  <!-- Tampilan foto ketika diklik -->
+  <div class="modal" id="modalGambar" onclick="tutupGambar()">
+    <button class="tutup" aria-label="Tutup"
+      onclick="tutupGambar()">×</button>
+
+    <img id="gambarBesar" src="" alt="Foto produk diperbesar">
+  </div>
+
+  <footer>
+    <p>© 2026 Ana Collection. Temukan gaya favoritmu!</p>
+  </footer>
+
+  <script>
+    const koleksi = [
+      {
+        nama: "Kemeja",
+        kategori: "atasan",
+        gambar: "images/kemeja.jpg.jpeg"
+      },
+      {
+        nama: "Celana",
+        kategori: "bawahan",
+        gambar: "images/celana.jpg.jpeg"
+      },
+      {
+        nama: "Gamis Cantik",
+        kategori: "muslim",
+        gambar: "images/gamis cantik.jpg.jpeg"
+      },
+      {
+        nama: "Kerudung",
+        kategori: "muslim",
+        gambar: "images/krudung.jpg.jpeg"
+      },
+      {
+        nama: "Sepatu",
+        kategori: "sepatu",
+        gambar: "images/sepatu.jpg.jpeg"
+      },
+      {
+        nama: "Sepatu Cewek",
+        kategori: "sepatu",
+        gambar: "images/sepatu cewek.jpeg"
+      },
+      {
+        nama: "Sepatu Cowok",
+        kategori: "sepatu",
+        gambar: "images/sepatu cowok.jpeg"
+      },
+      {
+        nama: "Heels",
+        kategori: "sepatu",
+        gambar: "images/heels.webp"
+      },
+      {
+        nama: "Sandal",
+        kategori: "sepatu",
+        gambar: "images/sandal.jpg.jpeg"
+      },
+      {
+        nama: "Sandal Cowok",
+        kategori: "sepatu",
+        gambar: "images/sandal cowok.jpeg"
+      },
+      {
+        nama: "Jaket",
+        kategori: "lainnya",
+        gambar: "images/jaket.jpeg"
+      },
+      {
+        nama: "Batik Pria",
+        kategori: "atasan",
+        gambar: "images/batik pria.jpeg"
+      }
+    ];
+
+    function tampilkanGaleri(kategori = "semua") {
+      const daftar = document.getElementById("daftarGaleri");
+
+      const hasil = koleksi.filter(item =>
+        kategori === "semua" || item.kategori === kategori
+      );
+
+      if (hasil.length === 0) {
+        daftar.innerHTML =
+          '<p class="tidak-ada">Belum ada foto pada kategori ini.</p>';
+        return;
+      }
+
+      daftar.innerHTML = hasil.map(item => `
+        <article class="galeri-card">
+          <img
+            src="${item.gambar}"
+            alt="${item.nama}"
+            loading="lazy"
+            onclick="bukaGambar('${item.gambar}', '${item.nama}')"
+            onerror="this.style.display='none';"
+          >
+
+          <div class="keterangan">
+            <h3>${item.nama}</h3>
+            <p>Koleksi Ana Collection</p>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function filterGaleri(kategori, tombol) {
+      document.querySelectorAll(".filter button").forEach(btn => {
+        btn.classList.remove("aktif");
+      });
+
+      tombol.classList.add("aktif");
+      tampilkanGaleri(kategori);
+    }
+
+    function bukaGambar(src, nama) {
+      const modal = document.getElementById("modalGambar");
+
+      document.getElementById("gambarBesar").src = src;
+      document.getElementById("gambarBesar").alt = nama;
+      modal.style.display = "flex";
+    }
+
+    function tutupGambar() {
+      document.getElementById("modalGambar").style.display = "none";
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        tutupGambar();
+      }
+    });
+
+    tampilkanGaleri();
+  </script>
+
+</body>
+</html>
